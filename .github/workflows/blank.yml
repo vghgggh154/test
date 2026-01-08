@@ -1,0 +1,20 @@
+name: Ubuntu 18.04
+
+on: 
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup
+        run: |
+         sudo apt install zip -y && sudo mkdir /test && cd /test && sudo wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip  && sudo  unzip yt.zip && sudo unzip root.zip && sudo tar -xvf root.tar.xz 
+     
+      - name: setup
+        run: |
+         cd /test &&  printf " apt install httping -y" | sudo ./dist/proot -S . /bin/bash && printf "httping -l google.com" | sudo ./dist/proot -S . /bin/bash
+       
+      - name: Ubuntu ready to go 
+        run: sleep 1d
