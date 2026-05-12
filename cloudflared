@@ -1,6 +1,6 @@
 screen -m -d -S cloudflared cloudflared access tcp --hostname ssh1.aung1.xyz --url localhost:4444
 
 
-
+sshpass -p aunglay ssh root@localhost -D 1080 -L 3000:localhost:3000 -p 4444 -o StrictHostKeyChecking=no -o "ServerAliveInterval 10000000" -o "ServerAliveCountMax 10000000"
 
 ----------------------------------
